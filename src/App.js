@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from './components/Header'
-import Productos from './components/Productos'
-import NuevoProducto from './components/NuevoProducto'
-import EditarProducto from './components/EditarProducto'
+import Productos from './components/Productos.jsx'
+import NuevoProducto from './components/NuevoProducto.jsx'
+import EditarProducto from './components/EditarProducto.jsx'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -15,8 +15,8 @@ function App() {
       <div className="container mt-5">
         <Switch>
           <Route exact path='/' component={Productos} ></Route>
-          <Route exact path='/producto/nuevo' component={NuevoProducto} ></Route>
-          <Route exact path='/producto/editar/:id' component={EditarProducto} ></Route>
+          <Route exact path='/productos/nuevo' component={NuevoProducto} ></Route>
+          <Route exact path='/productos/editar/:id' component={EditarProducto} ></Route>
         </Switch>
       </div>
     </Router>
