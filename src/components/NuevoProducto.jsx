@@ -20,8 +20,6 @@ const NuevoProducto = ({history}) => {
     const cargando = useSelector( state => state.productos.loading)
     const error = useSelector( state => state.productos.error)
 
-    console.log('cargando', cargando);
-
     //cuando el usuario haga submit
     const submitNuevoProducto = e => {
         e.preventDefault()
