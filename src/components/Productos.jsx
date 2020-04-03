@@ -13,6 +13,7 @@ const Productos = () => {
     //consultar la api
     const cargarProductos = () => dispatch(obtenerProductosAction())
     cargarProductos()
+    // eslint-disable-next-line
   }, [])
 
   //useSelector obtenemos el state

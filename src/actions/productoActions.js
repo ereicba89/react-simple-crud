@@ -4,14 +4,18 @@ import {
     AGREGAR_PRODUCTO_ERROR,
     COMENZAR_DESCARGA_PRODUCTOS,
     DESCARGA_PRODUCTOS_EXITO,
-    DESCARGA_PRODUCTOS_ERROR
+    DESCARGA_PRODUCTOS_ERROR,
+    OBTENER_PRODUCTO_ELIMINAR,
+    PRODUCTO_ELIMINADO_EXITO,
+    PRODUCTO_ELIMINADO_ERROR
 } from '../types'
+
 import clienteAxios from '../config/axios'
-import swal from 'sweetalert2'
+import Swal from 'sweetalert2'
 
 //crear nuevos productos
 
-export function crearNuevoProductoAction(producto){
+export function crearNuevoProductoAction(producto) {
     return async (dispatch) => {
         dispatch(agregarProducto())
 
@@ -22,14 +26,14 @@ export function crearNuevoProductoAction(producto){
             dispatch(agregarProductoExito(producto))
 
             // Alerta de exito
-            swal.fire('Correcto', 'El producto se agrego correctamente', 'success')
-        
+            Swal.fire('Correcto', 'El producto se agrego correctamente', 'success')
+
         } catch (error) {
             //si hay un error cambiar el state
             console.log(error);
             dispatch(agregarProductoError(true))
 
-            swal.fire({
+            Swal.fire({
                 icon: 'error',
                 title: 'Hubo un error',
                 text: 'Hubo un error, intenta nuevamente'
@@ -37,7 +41,7 @@ export function crearNuevoProductoAction(producto){
         }
     }
 }
- 
+
 const agregarProducto = () => ({
     type: AGREGAR_PRODUCTO,
     payload: true
@@ -59,17 +63,17 @@ const agregarProductoError = estado => ({
 
 //funcion que obtiene los productos de la base de datos
 
-export function obtenerProductosAction(){
+export function obtenerProductosAction() {
     return async (dispatch) => {
-        dispatch( descargarProductos())
+        dispatch(descargarProductos())
 
         try {
-            setTimeout( async () => {
+            setTimeout(async () => {
                 const respuesta = await clienteAxios.get('/productos')
-                dispatch( descargaProductosExitosa(respuesta.data))
+                dispatch(descargaProductosExitosa(respuesta.data))
             }, 3000);
         } catch (error) {
-            dispatch( descargaProductosError())
+            dispatch(descargaProductosError())
         }
     }
 }
@@ -86,5 +90,41 @@ const descargaProductosExitosa = productos => ({
 
 const descargaProductosError = () => ({
     type: DESCARGA_PRODUCTOS_ERROR,
+    payload: true
+})
+
+//Seleccionar y eliminar productos
+export function borrarProductoAction(id) {
+    return async (dispatch) => {
+        dispatch(obtenerProductoEliminar(id))
+        console.log(id);
+
+            try {
+                await clienteAxios.delete(`/productos/${id}`)
+                dispatch(eliminarProductoExito())
+
+                //si se elimina mostrat alerta
+                Swal.fire(
+                    'Eliminado',
+                    'El Producto fue eliminado correctamente',
+                    'success'
+                )
+            } catch (error) {
+                dispatch(eliminarProductoError())
+            }
+        }
+}
+
+const obtenerProductoEliminar = id => ({
+    type:  OBTENER_PRODUCTO_ELIMINAR,
+    payload: id
+})
+
+const eliminarProductoExito = () => ({
+    type:  PRODUCTO_ELIMINADO_EXITO,
+})
+
+const eliminarProductoError = () => ({
+    type:  PRODUCTO_ELIMINADO_ERROR,
     payload: true
 })
