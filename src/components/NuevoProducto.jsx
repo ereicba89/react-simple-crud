@@ -61,7 +61,7 @@ const NuevoProducto = ({history}) => {
                 onSubmit={submitNuevoProducto}
             >
               <div className='form-group'>
-                <label>Nuevo producto</label>
+                <label>Nombre producto</label>
                 <input
                   type='text'
                   className='form-control'

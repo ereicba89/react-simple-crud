@@ -44,10 +44,10 @@ const Producto = ({ producto }) => {
       <td>
         <span className='font-weigth-bold'>$ {precio}</span>
       </td>
-      <td className='acciones'>
+      <td className='acciones text-right'>
         <button
           type='button'
-          className='btn btn-primary mr-2'
+          className='btn btn-warning mr-2'
           onClick={() => redireccionarEdicion(producto)}>
           Editar
         </button>

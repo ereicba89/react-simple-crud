@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './components/Header'
+import Header from './components/Header.jsx'
 import Productos from './components/Productos.jsx'
 import NuevoProducto from './components/NuevoProducto.jsx'
 import EditarProducto from './components/EditarProducto.jsx'
